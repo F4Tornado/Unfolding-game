@@ -9,11 +9,9 @@ def start():
   file = open("file.txt", "w+");
   print("file.txt")
   file.write("Did this take you a while? (y/n) ")
-  file.close();
-  file = open("file.txt", "r");
-  print(file.read())
-
-
+  while len(open("file.txt").readlines()) == 1:
+      time.sleep(0.25);
+  file.write("Good luck!")
 
 def yesOrNo(ans):
   if ans.lower() in yes:
