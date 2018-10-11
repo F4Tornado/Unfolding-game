@@ -7,11 +7,8 @@ saveFile = open("saveFile.txt", "w+")
 
 def start():
   file = open("file.txt", "w+");
-  print("file.txt")
-  file.write("Did this take you a while? (y/n) ")
-  while len(open("file.txt").readlines()) == 1:
-      time.sleep(0.25);
-  file.write("Good luck!")
+  file.write("I hope this didn't take you too long.")
+  print("..-. .. .-.. . .-.-.- - -..- -")
 
 def yesOrNo(ans):
   if ans.lower() in yes:
@@ -19,7 +16,7 @@ def yesOrNo(ans):
   if ans.lower() in no:
     return "n"
 
-ready = raw_input("This is a game. Are you ready? (y/n) ")
+ready = raw_input("This is a game. Are you ready? (hint, google is your friend) (y/n) ")
 if yesOrNo(ready) == "n":
   time.sleep(3)
   ready = raw_input("Are you ready now? (y/n) ")
