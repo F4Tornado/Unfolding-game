@@ -1,13 +1,25 @@
 import time
+import SimpleHTTPServer
+import SocketServer
+import os
 
 startMessage = "Great then. Lets start."
 yes = ["y", "yes", "ya", "yep", "yup", "yaaaas", "totally", "totes", "sure", "you bet", "certainly", "definitely", "of course", "gladly", "indubitably", "absolutely", "indeed", "undoubtedly", "yeah, yeah, yeah", "fine", "affirmative", "very well", "obbviously", "aye", "forsooth", "yea", "verily", "surely", "why not", "https://www.inklyo.com/ways-to-say-yes-in-english/", "..."]
 no =  ["n", "no", "certainly not", "by no means", "of course not", "not really", "no way", "no dice", "nope", "nah", "nay", "nix", "no can do", "not likely", "of course not", "over my dead body", "https://www.macmillandictionary.com/us/thesaurus-category/american/ways-of-saying-no"]
 saveFile = open("saveFile.txt", "w+")
+port = 3000
+
+os.chdir("web")
+Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+
+httpd = SocketServer.TCPServer(("", port), Handler)
+
+httpd.serve_forever()
+os.chdir("../")
 
 def start():
   file = open("file.txt", "w+");
-  file.write("I hope this didn't take you too long.")
+  file.write("I hope this didn't take you too long.\nlocalhost:3000")
   print("..-. .. .-.. . .-.-.- - -..- -")
 
 def yesOrNo(ans):
