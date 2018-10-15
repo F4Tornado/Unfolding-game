@@ -19,7 +19,7 @@ os.chdir("../")
 
 def start():
   file = open("file.txt", "w+");
-  file.write("I hope this didn't take you too long.\nlocalhost:3000")
+  file.write("I hope this didn't take you too long.\n127.0.0.1:3000")
   print("..-. .. .-.. . .-.-.- - -..- -")
 
 def yesOrNo(ans):

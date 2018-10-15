@@ -1,9 +1,90 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>A Game</title>
-</head>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>A Game</title>
+    <meta charset="utf-8">
+  </head>
     <body>
+      <style>
+        * {
+          text-align: center;
+          font-family: Ubuntu, sans-serif;
+        }
+      </style>
       <h1>I assume you googled the number I put in the file.</h1>
+      <p>Whatever, for your next clue, play this game.<br>
+      The rules are you can pick 1, 2, or 3 dots, and whoever takes the last dot wins.<br>
+      The AI will play perfectly optimally, but you can win if you play perfectly optimally, but if you make a mistake, you lose.<br>
+      The AI has already gone first.<br>
+      <button onclick="take('player', 1)">Take one</button><br>
+      <button onclick="take('player', 2)">Take two</button><br>
+      <button onclick="take('player', 3)">Take three</button><br><br>
+      <h3 id="amt">The AI took</h3>
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 241" width="256" height="256"><defs><style>.cls-1{stroke:#000;stroke-miterlimit:10;} .cls-2 {stroke:#68ff72;fill:#68ff72;stroke-miterlimit:10;}</style></defs>
+        <circle class="cls-1" cx="24" cy="24" r="23.5"  id="0"/>
+        <circle class="cls-1" cx="88" cy="25" r="23.5"  id="1"/>
+        <circle class="cls-1" cx="152" cy="25" r="23.5" id="2"/>
+        <circle class="cls-1" cx="24" cy="89" r="23.5"  id="3"/>
+        <circle class="cls-1" cx="88" cy="89" r="23.5"  id="4"/>
+        <circle class="cls-1" cx="152" cy="89" r="23.5" id="5"/>
+        <circle class="cls-1" cx="24" cy="153" r="23.5" id="6"/>
+        <circle class="cls-1" cx="88" cy="153" r="23.5" id="7"/>
+        <circle class="cls-1" cx="152" cy="153" r="23.5"id="8"/>
+        <circle class="cls-1" cx="216" cy="24" r="23.5" id="9"/>
+        <circle class="cls-1" cx="24" cy="217" r="23.5" id="10"/>
+        <circle class="cls-1" cx="88" cy="217" r="23.5" id="11"/>
+        <circle class="cls-1" cx="152" cy="217" r="23.5"id="12"/>
+        <circle class="cls-1" cx="216" cy="89" r="23.5" id="13"/>
+        <circle class="cls-1" cx="216" cy="153" r="23.5"id="14"/>
+        <circle class="cls-2" cx="216" cy="217" r="23.5"id="15"/></svg>
+      <script>
+        Array.prototype.random = function () {return this[Math.floor((Math.random()*this.length))];}
+        let turn = "ai"
+        function start() {
+          setTimeout(() => {
+            take("ai")
+          })
+        }
+        let interval = setInterval(() => {
+          if (turn == "ai") {
+            take("ai")
+          }
+        }, 2000);
+        function take(who, num) {
+          if (who == "player" && turn == "player") {
+            let things = document.getElementsByTagName("circle")
+            console.log(things)
+            for (let i = num-1; i >= 0; i--) {
+              if (things[i].id == "15") {
+                document.getElementById("amt").innerHTML = "Good job! Check the terminal window."
+              }
+              removeElement(things[i].id)
+            }
+            turn = "ai"
+          } else if (who == "ai" && turn == "ai") {
+            let things = document.getElementsByTagName("circle")
+            let amt;
+            if (things.length%4 == 0) {
+              amt = [0, 1, 2].random()
+            } else {
+              amt = (things.length%4)-1
+            }
+            document.getElementById("amt").innerHTML = "The AI took "+(amt+1);
+            for (let i = amt; i >= 0; i--) {
+              if (things[i].id == "15") {
+                document.getElementById("amt").innerHTML = "You lost. Reload to try again."
+              }
+              removeElement(things[i].id)
+            }
+            turn = "player"
+          }
+        }
+        function removeElement(elementId) {
+          // Removes an element from the document
+          var element = document.getElementById(elementId);
+          element.parentNode.removeChild(element);
+        }
+      </script>
     </body>
 </html>
